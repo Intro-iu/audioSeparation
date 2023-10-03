@@ -32,13 +32,15 @@ def write_wav(filename, data, params):
     wav.close()
 
 
-rate=44100
+rate = 44100
+
+k = 5
 
 for i in range(1, 36):
     # 定义两个wav文件的路径
-    file1 = "./samples/Ejafjalla/Ejafjalla-"+str(i)+".wav"
+    file1 = "./samples/Swire/Swire-"+str(i)+".wav"
     for j in range(1, 36):
-        file2 = "./samples/Swire/Swire-"+str(j)+".wav"
+        file2 = "./samples/Typhon/Typhon-"+str(j)+".wav"
 
         # 读取两个wav文件的数据和参数
         data1, params1 = read_wav(file1)
@@ -104,18 +106,18 @@ for i in range(1, 36):
             if params1 == params2:
                 data = data1 + data2
                 # 定义一个新的wav文件的路径
-                file1 = "./samples/1_Split/1_Split-"+str(35*(i-1)+j)+".wav"
-                file2 = "./samples/2_Split/2_Split-"+str(35*(i-1)+j)+".wav"
-                file3 = "./samples/Merge/Merge-"+str(35*(i-1)+j)+".wav"
+                # file1 = "./samples/1_Split/1_Split-"+str(35*(i-1)+j)+".wav"
+                # file2 = "./samples/2_Split/2_Split-"+str(35*(i-1)+j)+".wav"
+                file3 = "./samples/Merge/Merge-"+str(35*35*k+35*(i-1)+j)+".wav"
                 # 写入新的wav文件的数据和参数
-                write_wav(file1, data1, params1)
-                write_wav(file2, data2, params2)
+                # write_wav(file1, data1, params1)
+                # write_wav(file2, data2, params2)
                 write_wav(file3, data, params1)
                 # 打印成功的信息
-                print(str(35*(i-1)+j)+" Succeed")
+                print(str(35*35*k+35*(i-1)+j)+" Succeed")
             else:
-                print(str(35*(i-1)+j)+" Failed")
+                print(str(35*35*k+35*(i-1)+j)+" Failed")
         else:
             # 如果没有相同的声道数，采样宽度和采样率，那么无法将两个wav文件合并同时播放
             # 打印失败的信息
-            print(str(35*(i-1)+j)+" Failed")
+            print(str(35*35*k+35*(i-1)+j)+" Failed")

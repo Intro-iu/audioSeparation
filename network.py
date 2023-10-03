@@ -24,7 +24,6 @@ class FCNN(nn.Module):
         return out
     
 class CNN(nn.Module):
-    global x_t
     def __init__(self):
         super(CNN, self).__init__()
         self.conv1 = nn.Conv1d(1, 16, 3, 1, 1) 
@@ -43,13 +42,8 @@ class CNN(nn.Module):
         x = self.pool(x)
         x = self.pool(nn.functional.relu(self.conv2(x)))
         x = x.view(-1, 32*16000) 
-        global x_t
-        x_t = x
         x = self.a1(self.fc1(x)) 
         x = self.a2(self.fc2(x)) 
         x = self.a3(self.fc3(x)) 
         return x
     
-    def output():
-        global x_t
-        return x_t
